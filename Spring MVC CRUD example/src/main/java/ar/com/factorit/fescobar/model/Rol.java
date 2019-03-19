@@ -101,4 +101,9 @@ public class Rol {
 		this.usuario = usuario;
 	}
 
+	@Override
+	public String toString() {
+		return getNombre();
+	}
+
 }
