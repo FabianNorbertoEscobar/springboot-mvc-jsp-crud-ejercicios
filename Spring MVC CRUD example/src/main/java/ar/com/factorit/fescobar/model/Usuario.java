@@ -6,11 +6,12 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -33,7 +34,9 @@ public class Usuario {
 	@Column(name = "password", nullable = false)
 	private String password;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "usuario")
+	@ManyToMany(cascade = { CascadeType.ALL })
+	@JoinTable(name = "UsuarioRoles", joinColumns = { @JoinColumn(name = "idUsuario") }, inverseJoinColumns = {
+			@JoinColumn(name = "idRol") })
 	private Set<Rol> roles = new HashSet<Rol>();
 
 	public Usuario(Integer id, String nombre, String apellido, String email, String password, Set<Rol> roles) {

@@ -1,15 +1,15 @@
 package ar.com.factorit.fescobar.model;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -35,18 +35,18 @@ public class Rol {
 	@Column(name = "estado")
 	private boolean estado;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idUsuario", nullable = true)
-	private Usuario usuario;
+	@ManyToMany(mappedBy = "roles")
+	private Set<Usuario> usuarios = new HashSet<Usuario>();
 
-	public Rol(Integer id, String nombre, String descripcion, Date fechaCreacion, boolean estado, Usuario usuario) {
+	public Rol(Integer id, String nombre, String descripcion, Date fechaCreacion, boolean estado,
+			Set<Usuario> usuarios) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.fechaCreacion = fechaCreacion;
 		this.estado = estado;
-		this.usuario = usuario;
+		this.usuarios = usuarios;
 	}
 
 	public Rol() {
@@ -93,12 +93,17 @@ public class Rol {
 		this.estado = estado;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public Set<Usuario> getUsuarios() {
+		return usuarios;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setUsuarios(Set<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
+	@Override
+	public String toString() {
+		return getNombre();
 	}
 
 }
