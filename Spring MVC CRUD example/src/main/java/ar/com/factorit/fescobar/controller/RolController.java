@@ -8,49 +8,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import ar.com.factorit.fescobar.model.Usuario;
+import ar.com.factorit.fescobar.model.Rol;
 import ar.com.factorit.fescobar.service.RolService;
-import ar.com.factorit.fescobar.service.UsuarioService;
 
 @Controller
-@RequestMapping(value = "/usuarios")
-public class UsuarioController {
+@RequestMapping(value = "/roles")
+public class RolController {
 
-	@Autowired
-	UsuarioService usuarioService;
-	
 	@Autowired
 	RolService rolService;
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public String getUsuarios(Model model) {
-		model.addAttribute("usuarios", usuarioService.getUsuarios());
-		return "usuarios";
+	public String getRoles(Model model) {
+		model.addAttribute("roles", rolService.getRoles());
+		return "roles";
 	}
-	
+
 	@RequestMapping(value = "/agregar", method = RequestMethod.GET)
 	public String agregar(Model model) {
-		model.addAttribute("usuario", new Usuario());
-		model.addAttribute("listaRoles", rolService.getRoles());
-		return "usuarioFormulario";
+		model.addAttribute("rol", new Rol());
+		return "rolFormulario";
 	}
 
 	@RequestMapping(value = "/guardar", method = RequestMethod.POST)
-	public String guardar(@ModelAttribute("usuario") Usuario usuario) {
-		usuarioService.save(usuario);
-		return "redirect:/usuarios/all";
+	public String guardar(@ModelAttribute("rol") Rol rol) {
+		rolService.save(rol);
+		return "redirect:/roles/all";
 	}
 
 	@RequestMapping(value = "/editar", method = RequestMethod.GET)
 	public String editar(@RequestParam("id") int id, Model model) {
-		model.addAttribute("usuario", usuarioService.getById(id));
-		model.addAttribute("listaRoles", rolService.getRoles());
-		return "usuarioFormulario";
+		model.addAttribute("rol", rolService.getById(id));
+		return "rolFormulario";
 	}
 
 	@RequestMapping(value = "/eliminar", method = RequestMethod.GET)
 	public String eliminar(@RequestParam("id") int id) {
-		usuarioService.delete(id);
-		return "redirect:/usuarios/all";
+		rolService.delete(id);
+		return "redirect:/roles/all";
 	}
 }

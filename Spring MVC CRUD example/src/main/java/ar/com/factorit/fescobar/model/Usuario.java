@@ -2,9 +2,12 @@ package ar.com.factorit.fescobar.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -27,19 +30,23 @@ public class Usuario {
 	@Column(name = "password", nullable = false)
 	private String password;
 
-	public Usuario(int id, String nombre, String apellido, String email, String password) {
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "idRol", referencedColumnName = "id", nullable = false)
+	private Rol rol;
+
+	public Usuario(int id, String nombre, String apellido, String email, String password, Rol rol) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
 		this.password = password;
+		this.rol = rol;
 	}
 
 	public Usuario() {
 		super();
 	}
-
 
 	public Integer getId() {
 		return id;
@@ -79,6 +86,14 @@ public class Usuario {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Rol getRol() {
+		return rol;
+	}
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
 	}
 
 }

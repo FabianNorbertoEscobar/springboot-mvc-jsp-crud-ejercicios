@@ -63,18 +63,29 @@
 							<div class="form-group">
 								<form:label path="email" class="col-md-3">E-mail:</form:label>
 								<div class="col-md-9">
-									<form:input path="email" placeholder="Ingrese e-mail"
+									<form:input type="email" path="email"
+										placeholder="Ingrese e-mail" class="form-control"
+										required="required" />
+								</div>
+							</div>
+							<br />
+							<br />
+							<div class="form-group">
+								<form:label path="password" class="col-md-3">Password:</form:label>
+								<div class="col-md-9">
+									<form:password path="password" placeholder="Ingrese password"
 										class="form-control" required="required" />
 								</div>
 							</div>
 							<br />
 							<br />
 							<div class="form-group">
-								<form:label path="password" class="col-md-3">Password actual:</form:label>
-								<div class="col-md-9">
-									<form:password path="password" placeholder="Ingrese password"
-										class="form-control" required="required" />
-								</div>
+								<form:label path="rol" class="col-md-3">Rol:</form:label>
+								<form:select path="rol" class="form-control">
+									<c:forEach items="${listaRoles}" var="rol">
+										<option value="${rol.id }" class="form-control">${rol.nombre}</option>
+									</c:forEach>
+								</form:select>
 							</div>
 							<br />
 							<br />
