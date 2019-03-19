@@ -59,7 +59,7 @@
 												<td>${usuario.apellido}</td>
 												<td>${usuario.email}</td>
 												<td>${usuario.password}</td>
-												<td>${usuario.rol.nombre}</td>
+												<td>${usuario.roles }</td>
 												<td><a href="${editar }"
 													class="btn btn-info center-block"><i
 														class="glyphicon glyphicon-edit"></i>Editar</a></td>

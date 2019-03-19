@@ -80,8 +80,8 @@
 							<br />
 							<br />
 							<div class="form-group">
-								<form:label path="rol" class="col-md-3">Rol:</form:label>
-								<form:select path="rol" class="form-control">
+								<form:label path="roles" class="col-md-3">Rol:</form:label>
+								<form:select multiple="true" path="roles" class="form-control">
 									<c:forEach items="${listaRoles}" var="rol">
 										<option value="${rol.id }" class="form-control">${rol.nombre}</option>
 									</c:forEach>

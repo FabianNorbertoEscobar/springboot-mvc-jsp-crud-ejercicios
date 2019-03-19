@@ -40,7 +40,7 @@ public class UsuarioController {
 		usuarioService.save(usuario);
 		return "redirect:/usuarios/all";
 	}
-
+	
 	@RequestMapping(value = "/editar", method = RequestMethod.GET)
 	public String editar(@RequestParam("id") int id, Model model) {
 		model.addAttribute("usuario", usuarioService.getById(id));

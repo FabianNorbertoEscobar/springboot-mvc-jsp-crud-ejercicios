@@ -1,13 +1,16 @@
 package ar.com.factorit.fescobar.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -30,22 +33,21 @@ public class Usuario {
 	@Column(name = "password", nullable = false)
 	private String password;
 
-	@OneToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "idRol", referencedColumnName = "id", nullable = false)
-	private Rol rol;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "usuario")
+	private Set<Rol> roles = new HashSet<Rol>();
 
-	public Usuario(int id, String nombre, String apellido, String email, String password, Rol rol) {
+	public Usuario(Integer id, String nombre, String apellido, String email, String password, Set<Rol> roles) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
 		this.password = password;
-		this.rol = rol;
+		this.roles = roles;
 	}
 
 	public Usuario() {
-		super();
+
 	}
 
 	public Integer getId() {
@@ -88,12 +90,12 @@ public class Usuario {
 		this.password = password;
 	}
 
-	public Rol getRol() {
-		return rol;
+	public Set<Rol> getRoles() {
+		return roles;
 	}
 
-	public void setRol(Rol rol) {
-		this.rol = rol;
+	public void setRoles(Set<Rol> roles) {
+		this.roles = roles;
 	}
 
 }
