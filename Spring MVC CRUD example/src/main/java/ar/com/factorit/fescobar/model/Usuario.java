@@ -1,10 +1,17 @@
 package ar.com.factorit.fescobar.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,19 +34,24 @@ public class Usuario {
 	@Column(name = "password", nullable = false)
 	private String password;
 
-	public Usuario(int id, String nombre, String apellido, String email, String password) {
+	@ManyToMany(cascade = { CascadeType.ALL })
+	@JoinTable(name = "UsuarioRoles", joinColumns = { @JoinColumn(name = "idUsuario") }, inverseJoinColumns = {
+			@JoinColumn(name = "idRol") })
+	private Set<Rol> roles = new HashSet<Rol>();
+
+	public Usuario(Integer id, String nombre, String apellido, String email, String password, Set<Rol> roles) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
 		this.password = password;
+		this.roles = roles;
 	}
 
 	public Usuario() {
-		super();
-	}
 
+	}
 
 	public Integer getId() {
 		return id;
@@ -79,6 +91,14 @@ public class Usuario {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Set<Rol> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Rol> roles) {
+		this.roles = roles;
 	}
 
 }

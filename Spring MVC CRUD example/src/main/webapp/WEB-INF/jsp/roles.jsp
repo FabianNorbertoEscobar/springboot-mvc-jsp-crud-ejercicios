@@ -3,7 +3,7 @@
 
 <html>
 <head>
-<title>Usuarios</title>
+<title>Roles</title>
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,45 +21,50 @@
 	<div class="container-fluid">
 		<div class="row-fluid">
 			<div class="col-md-offset-1 col-md-10">
-				<h1 class="text-center">Usuarios</h1>
+				<h1 class="text-center">Roles</h1>
 				<br /> <br />
 
 				<div class="panel panel-info">
 					<div class="panel-heading">
-						<div class="panel-title">Listado de Usuarios</div>
+						<div class="panel-title">Listado de Roles</div>
 					</div>
 					<div class="panel-body">
-						<c:if test="${!empty usuarios }">
+						<c:if test="${!empty roles }">
 							<div class="table-responsive">
 								<table class="table table-bordered table-striped table-hover">
 									<thead>
 										<tr class="active success">
 											<th>Nombre</th>
-											<th>Apellido</th>
-											<th>Email</th>
-											<th>Password</th>
-											<th>Rol</th>
+											<th>Descripción</th>
+											<th>Fecha de Creación</th>
+											<th>Estado</th>
 											<th>Editar</th>
 											<th>Eliminar</th>
 										</tr>
 									</thead>
 									<tbody>
 
-										<c:forEach items="${usuarios}" var="usuario">
+										<c:forEach items="${roles}" var="rol">
 
-											<c:url var="editar" value="/usuarios/editar">
-												<c:param name="id" value="${usuario.id }"></c:param>
+											<c:url var="editar" value="/roles/editar">
+												<c:param name="id" value="${rol.id }"></c:param>
 											</c:url>
-											<c:url var="eliminar" value="/usuarios/eliminar">
-												<c:param name="id" value="${usuario.id }"></c:param>
+											<c:url var="eliminar" value="/roles/eliminar">
+												<c:param name="id" value="${rol.id }"></c:param>
 											</c:url>
 
 											<tr>
-												<td>${usuario.nombre}</td>
-												<td>${usuario.apellido}</td>
-												<td>${usuario.email}</td>
-												<td>${usuario.password}</td>
-												<td>${usuario.roles }</td>
+												<td>${rol.nombre}</td>
+												<td>${rol.descripcion}</td>
+												<td>${rol.fechaCreacion}</td>
+												<c:choose>
+													<c:when test="${rol.estado == true }">
+														<td>Activo</td>
+													</c:when>
+													<c:otherwise>
+														<td>Inactivo</td>
+													</c:otherwise>
+												</c:choose>
 												<td><a href="${editar }"
 													class="btn btn-info center-block"><i
 														class="glyphicon glyphicon-edit"></i>Editar</a></td>
@@ -73,7 +78,7 @@
 							</div>
 						</c:if>
 						<br /> <br /> <a href="agregar" class="btn btn-success"><i
-							class="glyphicon glyphicon-check"></i> Agregar nuevo usuario</a>
+							class="glyphicon glyphicon-check"></i> Agregar nuevo rol</a>
 					</div>
 				</div>
 			</div>
