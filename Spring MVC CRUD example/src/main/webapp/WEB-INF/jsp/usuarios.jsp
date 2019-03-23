@@ -37,7 +37,6 @@
 											<th>Nombre</th>
 											<th>Apellido</th>
 											<th>Email</th>
-											<th>Password</th>
 											<th>Rol</th>
 											<th>Editar</th>
 											<th>Eliminar</th>
@@ -58,7 +57,6 @@
 												<td>${usuario.nombre}</td>
 												<td>${usuario.apellido}</td>
 												<td>${usuario.email}</td>
-												<td>${usuario.password}</td>
 												<td>${usuario.rol.nombre}</td>
 												<td><a href="${editar }"
 													class="btn btn-info center-block"><i
