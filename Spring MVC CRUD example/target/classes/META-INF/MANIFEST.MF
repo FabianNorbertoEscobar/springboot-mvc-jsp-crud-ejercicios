@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: spring-boot-first-web-application
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: fescobar
+Built-By: Fabian
 Implementation-Vendor-Id: com.in28minutes.springboot.web
-Build-Jdk: 1.8.0_31
+Build-Jdk: 1.8.0_201
 Implementation-URL: http://projects.spring.io/spring-boot/spring-boot-
  first-web-application/
 Created-By: Maven Integration for Eclipse
