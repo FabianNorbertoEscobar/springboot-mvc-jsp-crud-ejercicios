@@ -81,11 +81,12 @@
 							<br />
 							<div class="form-group">
 								<form:label path="roles" class="col-md-3">Rol:</form:label>
-								<form:select multiple="true" path="roles" class="form-control">
+								<div class="col-md-9">
 									<c:forEach items="${listaRoles}" var="rol">
-										<option value="${rol.id }" class="form-control">${rol.nombre}</option>
+										<form:checkbox path="roles" value="${rol.id }" />${rol.nombre }
+										<br />
 									</c:forEach>
-								</form:select>
+								</div>
 							</div>
 							<br />
 							<br />
